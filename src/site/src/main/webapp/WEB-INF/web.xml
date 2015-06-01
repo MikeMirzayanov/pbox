@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+          http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+    <display-name>me.pbox.site</display-name>
+    <filter>
+        <filter-name>PreprocessFilter</filter-name>
+        <filter-class>me.pbox.site.misc.PreprocessFilter</filter-class>
+    </filter>
+
+    <filter>
+        <filter-name>DispatchFilter</filter-name>
+        <filter-class>org.nocturne.main.DispatchFilter</filter-class>
+    </filter>
+
+    <filter>
+        <filter-name>debugResourceFilter</filter-name>
+        <filter-class>org.nocturne.main.DebugResourceFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>debugResourceFilter</filter-name>
+        <url-pattern>*.png</url-pattern>
+        <url-pattern>*.gif</url-pattern>
+        <url-pattern>*.jpg</url-pattern>
+        <url-pattern>*.txt</url-pattern>
+        <url-pattern>*.css</url-pattern>
+        <url-pattern>*.js</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>PreprocessFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>DispatchFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <listener>
+        <listener-class>me.pbox.site.ApplicationListener</listener-class>
+    </listener>
+
+    <session-config>
+        <session-timeout>600</session-timeout>
+    </session-config>
+</web-app>
