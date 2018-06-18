@@ -10,6 +10,23 @@ import org.apache.log4j.Logger;
 public class EnvironmentUtil {
     private static final Logger logger = Logger.getLogger(EnvironmentUtil.class);
 
+    public static boolean prependPath(String directory) {
+        logger.info("Prepend to the PATH the directory '" + directory + "'.");
+
+        try {
+            boolean result = InvokeUtil.run(false, false, Environment.getBin("pathed"), "-a", directory, "-s", "-1") == 0;
+            if (result) {
+                logger.info("Successfully prepended to the PATH the directory '" + directory + "'.");
+            } else {
+                logger.warn("Failed to prepend to the PATH the directory '" + directory + "'.");
+            }
+            return result;
+        } catch (InvokeException e) {
+            logger.warn("Can't prepend to PATH '" + directory + "'.", e);
+            return false;
+        }
+    }
+
     public static boolean appendPath(String directory) {
         logger.info("Append to the PATH the directory '" + directory + "'.");
 

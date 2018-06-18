@@ -115,6 +115,13 @@ public class Environment {
         return temp;
     }
 
+    public static File getPboxMsiDirectory() {
+        File temp = new File(getPboxHome() + "\\temp\\msis");
+        //noinspection ResultOfMethodCallIgnored
+        temp.mkdirs();
+        return temp;
+    }
+
     public static String getBin(String tool) {
         if (tool.toLowerCase().endsWith(".exe")) {
             throw new IllegalArgumentException("Expected tool name without extension, but got '" + tool + "'.");
