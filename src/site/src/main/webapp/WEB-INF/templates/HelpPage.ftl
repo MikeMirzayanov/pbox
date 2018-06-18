@@ -86,7 +86,7 @@
                         Ask PBOX to &quot;forget&quot; an installed package (the package will not be uninstalled).
                     </td>
                     <td style="width: 50%;">
-                        <span class="terminal">pbox uninstall far</span>
+                        <span class="terminal">pbox forget far</span>
                     </td>
                 </tr>
                 <tr>

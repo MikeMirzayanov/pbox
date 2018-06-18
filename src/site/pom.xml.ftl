@@ -8,61 +8,42 @@
     <name>pbox.me:site</name>
     <url>http://pbox.me</url>
 
-    <repositories>
-        <repository>
-            <id>jrun</id>
-            <url>http://jrun.googlecode.com/svn/trunk/repo/</url>
-        </repository>
-        <repository>
-            <id>nocturne</id>
-            <url>http://nocturne.googlecode.com/svn/trunk/repo/</url>
-        </repository>
-        <repository>
-            <id>combine-resources-filter</id>
-            <url>http://combine-resources-filter.googlecode.com/svn/trunk/repo/</url>
-        </repository>
-        <repository>
-            <id>jacuzzi</id>
-            <url>http://jacuzzi.googlecode.com/svn/trunk/repo/</url>
-        </repository>
-    </repositories>
-
     <dependencies>
         <dependency>
             <groupId>com.codeforces</groupId>
             <artifactId>commons</artifactId>
-            <version>2.1-SNAPSHOT</version>
+            <version>2.3-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.nocturne</groupId>
             <artifactId>nocturne</artifactId>
-            <version>1.2.7-SNAPSHOT</version>
+            <version>1.3.3-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>jacuzzi</groupId>
             <artifactId>jacuzzi</artifactId>
-            <version>0.0.35-SNAPSHOT</version>
+            <version>0.0.36-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.34</version>
+            <version>5.1.43</version>
         </dependency>
         <dependency>
             <groupId>com.zaxxer</groupId>
-            <artifactId>HikariCP-java6</artifactId>
-            <version>2.2.5</version>
+            <artifactId>HikariCP</artifactId>
+            <version>2.6.3</version>
         </dependency>
         <dependency>
             <groupId>xalan</groupId>
             <artifactId>xalan</artifactId>
-            <version>2.7.1</version>
+            <version>2.7.2</version>
         </dependency>
         <!-- To check if we needed realy. -->
         <dependency>
             <groupId>xalan</groupId>
             <artifactId>serializer</artifactId>
-            <version>2.7.1</version>
+            <version>2.7.2</version>
         </dependency>
         <dependency>
             <groupId>xml-apis</groupId>
@@ -97,12 +78,12 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>2.4.3</version>
+            <version>2.8.9</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.4.3</version>
+            <version>2.8.9</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -110,12 +91,14 @@
             <version>2.5</version>
             <scope>provided</scope>
         </dependency>
+        <!--
         <dependency>
             <groupId>de.javakaffee.msm</groupId>
             <artifactId>msm-javolution-serializer</artifactId>
             <version>1.6.5</version>
             <scope>runtime</scope>
         </dependency>
+        -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
