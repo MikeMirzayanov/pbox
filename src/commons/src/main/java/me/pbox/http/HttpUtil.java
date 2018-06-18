@@ -20,7 +20,7 @@ public class HttpUtil {
 
             long beforeTimeMillis = System.currentTimeMillis();
 
-            boolean result = InvokeUtil.run(Environment.getBin("wget"), "--tries=3", "--retry-connrefused", "--output-document=" + targetFile, url) == 0;
+            boolean result = InvokeUtil.run(Environment.getBin("wget"), "--tries=60", "--retry-connrefused", "-T60", "--retry-on-http-error=408,429,500,501,502,503,504", "--output-document=" + targetFile, url) == 0;
             long durationTimeMillis = System.currentTimeMillis() - beforeTimeMillis;
 
             if (result) {
