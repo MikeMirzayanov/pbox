@@ -96,6 +96,10 @@ public class Main {
 
         try {
             switch (command) {
+                case "update-self":
+                    new UpdateSelfCommand().run(opts, arguments);
+                    break;
+
                 case "install":
                     new InstallCommand().run(opts, arguments);
                     break;

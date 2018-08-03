@@ -53,6 +53,6 @@ public class HelpPage extends WebPage {
 
     @Override
     public String getTitle() {
-        return "DownloadListenerPage";
+        return "Help";
     }
 }

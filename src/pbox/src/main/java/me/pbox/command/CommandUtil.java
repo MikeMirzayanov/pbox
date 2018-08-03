@@ -4,6 +4,7 @@ import me.pbox.env.Environment;
 import me.pbox.env.EnvironmentUtil;
 import me.pbox.invoke.InvokeException;
 import me.pbox.invoke.InvokeUtil;
+import me.pbox.option.Opts;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -123,8 +124,12 @@ public class CommandUtil {
         }
     }
 
-    public static void path(File pboxPkgDir, String item, File homeDir) {
-        EnvironmentUtil.appendPath(item);
+    public static void path(File pboxPkgDir, String item, File homeDir, Opts opts) {
+        if (opts.has("pp") || opts.has("prepend-path")) {
+            EnvironmentUtil.prependPath(item);
+        } else {
+            EnvironmentUtil.appendPath(item);
+        }
     }
 
     public static void unpath(File pboxDir, String item, File homedir) {
@@ -192,10 +197,17 @@ public class CommandUtil {
             throw new RuntimeException("Can't find msi file '" + msiFile + "'.");
         }
 
+        try {
+            FileUtils.copyFileToDirectory(msiFile, Environment.getPboxMsiDirectory());
+        } catch (IOException e) {
+            throw new IllegalArgumentException("Unable to copy file '" + msiFile
+                    + "' to the directory '" + Environment.getPboxMsiDirectory() + "'.", e);
+        }
+
         List<String> commandLineParts = new ArrayList<>();
         commandLineParts.add("msiexec.exe");
         commandLineParts.add("/i");
-        commandLineParts.add("\"" + msiFile.getAbsolutePath() + "\"");
+        commandLineParts.add("\"" + new File(Environment.getPboxMsiDirectory(), msiFile.getName()) + "\"");
         commandLineParts.addAll(splitCommandLine(nameAndParams[1]));
 
         StringBuilder commandLine = new StringBuilder();
@@ -207,11 +219,13 @@ public class CommandUtil {
         }
 
         try {
-            File msiexecRunFile = new File(Environment.getPboxTempAsFile(), "msiexecRunCmd.bat");
+            File msiexecRunFile = new File(pboxPkgDir, "msiexecRunCmd.bat");
             FileUtils.write(msiexecRunFile, commandLine);
             InvokeUtil.run(pboxPkgDir, "cmd.exe", "/C", msiexecRunFile.getAbsolutePath());
         } catch (InvokeException | IOException e) {
-            throw new RuntimeException("Can't run msi '" + StringUtils.join(commandLineParts, ' ') + "'.");
+            throw new RuntimeException("Can't run msi '" + StringUtils.join(commandLineParts, ' ') + "'.", e);
+        } finally {
+            FileUtils.deleteQuietly(new File(Environment.getPboxMsiDirectory(), msiFile.getName()));
         }
     }
 
@@ -235,16 +249,25 @@ public class CommandUtil {
             throw new RuntimeException("Can't find msi file '" + msiFile + "'.");
         }
 
+        try {
+            FileUtils.copyFileToDirectory(msiFile, Environment.getPboxMsiDirectory());
+        } catch (IOException e) {
+            throw new IllegalArgumentException("Unable to copy file '" + msiFile
+                    + "' to the directory '" + Environment.getPboxMsiDirectory() + "'.", e);
+        }
+
         List<String> commandLineParts = new ArrayList<>();
         commandLineParts.add("msiexec.exe");
         commandLineParts.add("/x");
-        commandLineParts.add(msiFile.getAbsolutePath());
+        commandLineParts.add(new File(Environment.getPboxMsiDirectory(), msiFile.getName()).getAbsolutePath());
         commandLineParts.addAll(splitCommandLine(nameAndParams[1]));
 
         try {
             InvokeUtil.run(pboxPkgDir, commandLineParts.toArray(new String[commandLineParts.size()]));
         } catch (InvokeException e) {
-            throw new RuntimeException("Can't run msi '" + StringUtils.join(commandLineParts, ' ') + "'.");
+            throw new RuntimeException("Can't run msi '" + StringUtils.join(commandLineParts, ' ') + "'.", e);
+        } finally {
+            FileUtils.deleteQuietly(new File(Environment.getPboxMsiDirectory(), msiFile.getName()));
         }
     }
 

@@ -35,6 +35,7 @@ public class ChocolateyUtil {
 
     private static void setupPackage(Package pack, String information) throws IOException {
         Pattern pattern = Pattern.compile("<a href=\"/packages/" + pack.getName() + "/([-_.\\w]+)\">[^<]+</a>");
+        String nupkgFileUrl = null;
 
         for (String line : information.split("[\r\n]+")) {
             String s = line.trim();
@@ -53,6 +54,9 @@ public class ChocolateyUtil {
                 while (scanner.hasNext()) {
                     String token = scanner.next();
                     if (token.startsWith("http:") || token.startsWith("https:")) {
+                        if (nupkgFileUrl == null) {
+                            nupkgFileUrl = token;
+                        }
                         int pos = token.lastIndexOf('/');
                         pack.getVersions().add(token.substring(pos + 1));
                     }
@@ -64,10 +68,9 @@ public class ChocolateyUtil {
             return;
         }
 
-        String url = "https://chocolateypackages.s3.amazonaws.com/" + pack.getName() + "." + pack.getVersions().get(0) + ".nupkg";
-        File nupkgFile = HttpUtil.getTemporaryFile(url, true, true);
+        File nupkgFile = HttpUtil.getTemporaryFile(nupkgFileUrl, true, true);
         if (nupkgFile == null || !nupkgFile.isFile() || nupkgFile.length() == 0) {
-            throw new RuntimeException("Can't find chocolatey file " + url + ".");
+            throw new RuntimeException("Can't find chocolatey file " + nupkgFileUrl + ".");
         }
 
         File nupkgDir = new File(nupkgFile.getParent(), pack.getName() + "@" + pack.getVersions().get(0));
@@ -155,10 +158,6 @@ public class ChocolateyUtil {
         return null;
     }
 
-    public static void main(String[] args) throws IOException {
-        ChocolateyUtil.grub("GoogleChrome");
-    }
-
     public static final class Package {
         private final String name;
         private String description;
@@ -223,5 +222,9 @@ public class ChocolateyUtil {
         public void setTags(List<String> tags) {
             this.tags = tags;
         }
+    }
+
+    public static void main(String[] args) throws IOException {
+        System.out.println(grub("7zip.install"));
     }
 }

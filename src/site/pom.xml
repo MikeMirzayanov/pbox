@@ -153,6 +153,30 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-<#include "profile.xml.ftl"/>
+        <dev.home>/opt/pbox</dev.home>
+        <app.home>/opt/pbox</app.home>
+        
+        <logging.path>${app.home}/pbox.log</logging.path>
+        <nocturne.template-paths>WEB-INF/templates</nocturne.template-paths>
+        <nocturne.debug>false</nocturne.debug>
+        <nocturne.templates-update-delay>60000</nocturne.templates-update-delay>
+        <nocturne.sticky-template-paths>false</nocturne.sticky-template-paths>
+        <timezone>Europe/Moscow</timezone>
+        
+        <!-- %s: packageName, %s: fileName. -->
+        <icon-url-pattern>http://repo.pbox.me/1.0/%s/%s</icon-url-pattern>
+        <packages-dir-path>/var/sites/repo.pbox.me/1.0</packages-dir-path>
+        
+        <database.driver>com.mysql.jdbc.Driver</database.driver>
+        <database.url>jdbc:mysql://127.0.0.1/pbox?useUnicode=true&amp;characterSetResults=UTF-8&amp;characterEncoding=UTF-8</database.url>
+        <database.user>pbox</database.user>
+        <database.password>e761935e8b5e1</database.password>
+        <database.max-pool-size>10</database.max-pool-size>
+        
+        <caption.database.url>jdbc:mysql://127.0.0.1/pbox?useUnicode=true&amp;characterSetResults=UTF-8&amp;characterEncoding=UTF-8</caption.database.url>
+        <caption.database.driver>com.mysql.jdbc.Driver</caption.database.driver>
+        <caption.database.user>pbox</caption.database.user>
+        <caption.database.password>e761935e8b5e1</caption.database.password>
+        <caption.database.max-pool-size>10</caption.database.max-pool-size>
     </properties>
 </project>

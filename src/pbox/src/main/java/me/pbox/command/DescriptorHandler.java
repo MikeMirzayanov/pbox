@@ -161,7 +161,7 @@ public class DescriptorHandler extends DefaultHandler {
                 break;
 
             case "path":
-                CommandUtil.path(pboxDir, content, homedir);
+                CommandUtil.path(pboxDir, content, homedir, opts);
                 break;
             case "unpath":
                 CommandUtil.unpath(pboxDir, content, homedir);
