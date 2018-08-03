@@ -1,0 +1,14 @@
+trash
+src/commons/.idea
+src/commons/target
+src/commons/*.bat
+src/pbox/.idea
+src/pbox/target
+src/pbox/*.bat
+src/pbox/profiles/*.properties
+src/pbox/pbox.iml
+src/pbox/pom.xml
+src/site/.idea
+src/site/target
+src/site/*.bat
+src/site/profiles/*.properties
