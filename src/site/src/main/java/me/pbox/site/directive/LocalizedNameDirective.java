@@ -10,7 +10,7 @@ import freemarker.template.*;
 import freemarker.template.utility.DeepUnwrap;
 import me.pbox.site.model.Localized;
 import me.pbox.site.util.LocaleUtil;
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.text.StringEscapeUtils;
 import org.nocturne.main.ApplicationContext;
 
 import java.io.IOException;
@@ -49,7 +49,7 @@ public class LocalizedNameDirective implements TemplateDirectiveModel {
                         : localized.getEnglishName();
             }
 
-            name = StringEscapeUtils.escapeHtml(name);
+            name = StringEscapeUtils.escapeHtml4(name);
 
             name = Patterns.LINE_BREAK_PATTERN.matcher(name).replaceAll("<br/>");
 

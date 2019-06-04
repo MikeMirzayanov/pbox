@@ -12,3 +12,5 @@ src/site/.idea
 src/site/target
 src/site/*.bat
 src/site/profiles/*.properties
+/src/site/pom.xml
+/src/site/site.iml
