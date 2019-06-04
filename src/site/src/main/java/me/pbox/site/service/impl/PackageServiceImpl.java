@@ -4,7 +4,7 @@ import com.codeforces.commons.xml.XmlUtil;
 import me.pbox.site.model.Package;
 import me.pbox.site.service.PackageService;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.NodeList;
 
 import java.io.File;
