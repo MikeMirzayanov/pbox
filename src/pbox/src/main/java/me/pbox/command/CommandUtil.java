@@ -166,7 +166,7 @@ public class CommandUtil {
     }
 
     public static void env(File pboxPkgDir, String item, File homeDir) {
-        String[] keyAndValue = item.split("=");
+        String[] keyAndValue = item.split("=", 2);
         if (keyAndValue.length != 2 || StringUtils.isBlank(keyAndValue[0]) || keyAndValue[1] == null) {
             throw new IllegalArgumentException("Expected exactly form key=value while setting env.");
         }

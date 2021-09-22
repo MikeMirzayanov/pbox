@@ -1,5 +1,7 @@
 @echo off
 
+SET PATH=C:\Programs\Java-7-32;%PATH%
+
 IF "%1"=="" (
     echo Usage: make ^<profile-name^>
     echo Example: make dev
