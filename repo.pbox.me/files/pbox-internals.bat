@@ -44,6 +44,54 @@ for %%j in ("java.exe" "%ALLUSERSPROFILE%\pbox\jre\jre\bin\java.exe" "!PBOX_HOME
                 echo Found Java 8: !PBOX_JAVA_EXE!
                 goto foundJavaExe
             )
+            "!PBOX_HOME!\bin\contains.exe" "%TEMP%\java.pbox.err" "build 9" > nul
+            if errorlevel 1 (
+                set PBOX_JAVA_EXE=%%j
+                echo Found Java 9: !PBOX_JAVA_EXE!
+                goto foundJavaExe
+            )
+            "!PBOX_HOME!\bin\contains.exe" "%TEMP%\java.pbox.err" "build 10" > nul
+            if errorlevel 1 (
+                set PBOX_JAVA_EXE=%%j
+                echo Found Java 10: !PBOX_JAVA_EXE!
+                goto foundJavaExe
+            )
+            "!PBOX_HOME!\bin\contains.exe" "%TEMP%\java.pbox.err" "build 11" > nul
+            if errorlevel 1 (
+                set PBOX_JAVA_EXE=%%j
+                echo Found Java 11: !PBOX_JAVA_EXE!
+                goto foundJavaExe
+            )
+            "!PBOX_HOME!\bin\contains.exe" "%TEMP%\java.pbox.err" "build 12" > nul
+            if errorlevel 1 (
+                set PBOX_JAVA_EXE=%%j
+                echo Found Java 12: !PBOX_JAVA_EXE!
+                goto foundJavaExe
+            )
+            "!PBOX_HOME!\bin\contains.exe" "%TEMP%\java.pbox.err" "build 13" > nul
+            if errorlevel 1 (
+                set PBOX_JAVA_EXE=%%j
+                echo Found Java 13: !PBOX_JAVA_EXE!
+                goto foundJavaExe
+            )
+            "!PBOX_HOME!\bin\contains.exe" "%TEMP%\java.pbox.err" "build 14" > nul
+            if errorlevel 1 (
+                set PBOX_JAVA_EXE=%%j
+                echo Found Java 14: !PBOX_JAVA_EXE!
+                goto foundJavaExe
+            )
+            "!PBOX_HOME!\bin\contains.exe" "%TEMP%\java.pbox.err" "build 15" > nul
+            if errorlevel 1 (
+                set PBOX_JAVA_EXE=%%j
+                echo Found Java 15: !PBOX_JAVA_EXE!
+                goto foundJavaExe
+            )
+            "!PBOX_HOME!\bin\contains.exe" "%TEMP%\java.pbox.err" "build 17" > nul
+            if errorlevel 1 (
+                set PBOX_JAVA_EXE=%%j
+                echo Found Java 17: !PBOX_JAVA_EXE!
+                goto foundJavaExe
+            )
         )
     )
 )

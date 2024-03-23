@@ -10,6 +10,7 @@ IF "%1"=="" (
     ) ELSE (
         call fm --properties=profiles/%1.properties pom.xml.ftl > pom.xml
         if errorlevel 1 pause
+        call mvn validate -Dfile.encoding=UTF-8
         call mvn clean package -Dmaven.test.skip=true -Dfile.encoding=UTF-8
     )
 )

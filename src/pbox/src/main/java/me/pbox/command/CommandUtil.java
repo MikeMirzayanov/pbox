@@ -12,7 +12,9 @@ import org.apache.log4j.Logger;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Mike Mirzayanov (mirzayanovmr@gmail.com)
@@ -168,7 +170,11 @@ public class CommandUtil {
     public static void env(File pboxPkgDir, String item, File homeDir) {
         String[] keyAndValue = item.split("=", 2);
         if (keyAndValue.length != 2 || StringUtils.isBlank(keyAndValue[0]) || keyAndValue[1] == null) {
-            throw new IllegalArgumentException("Expected exactly form key=value while setting env.");
+            String keyAndValueAsString = Arrays.stream(keyAndValue)
+                    .map(s -> "'" + s + "'").collect(Collectors.joining(","));
+            throw new IllegalArgumentException("Expected exactly form key=value while setting env, but '"
+                    + item + "' found [keyAndValue.length=" + keyAndValue.length
+                    + ", keyAndValueAsString=" + keyAndValueAsString + "].");
         }
         EnvironmentUtil.setEnvironmentVariable(keyAndValue[0], keyAndValue[1]);
     }
